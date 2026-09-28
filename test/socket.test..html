@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Socket Test</title>
+</head>
+<body>
+
+<h2>Socket.IO Test</h2>
+
+<p id="status">Connecting...</p>
+
+<pre id="output"></pre>
+
+<script src="http://localhost:5000/socket.io/socket.io.js"></script>
+
+<script>
+    const socket = io("http://localhost:5000");
+
+    socket.on("connect", () => {
+        document.getElementById("status").textContent =
+            "Connected: " + socket.id;
+    });
+
+    socket.on("disaster_updated", (disaster) => {
+        document.getElementById("output").textContent =
+            JSON.stringify(disaster, null, 2);
+    });
+</script>
+
+</body>
+</html>
